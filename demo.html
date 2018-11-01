@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
     <title>Intergram Demo Page</title>
 
@@ -14,7 +15,7 @@
             padding: 0;
             font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
-
+        
         .main {
             max-width: 600px;
             margin: 5em auto;
@@ -25,25 +26,29 @@
     </style>
 
 </head>
+
 <body>
 
-<div class="main">
-    <h1>Intergram Demo Page</h1>
-    <p>Free live chat widget linked to your Telegram messenger. </p>
+    <div class="main">
+        <h1>Intergram Demo Page</h1>
+        <p>Free live chat widget linked to your Telegram messenger. </p>
 
-    <p><a href="https://github.com/idoco/intergram">More information...</a></p>
-</div>
+        <p><a href="https://github.com/idoco/intergram">More information...</a></p>
+    </div>
 
-<script>
-    window.intergramId = 312940879;
-    window.intergramServer = window.location.origin;
-    window.intergramCustomizations = {
-        closedChatAvatarUrl: 'media/demo_avatar.jpg',
-        introMessage: 'Hello! How can I help you?',
-        closedStyle: 'button', // button or chat
-    };
-</script>
-<script src="/js/widget.js"></script>
+    <script>
+        // window.intergramId = 312940879;
+        // window.intergramServer = window.location.origin;
+        indow.intergramId = 674977745
+        window.intergramServer = oplchat.herokuapp.com;
+        window.intergramCustomizations = {
+            closedChatAvatarUrl: 'media/demo_avatar.jpg',
+            introMessage: 'Hello! How can I help you?',
+            closedStyle: 'button', // button or chat
+        };
+    </script>
+    <script src="/js/widget.js"></script>
 
 </body>
+
 </html>
