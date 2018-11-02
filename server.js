@@ -7,11 +7,11 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
-app.use(express.static('dist', {index: 'demo.html', maxage: '4h'}));
+app.use(express.static('dist', { index: 'demo.html', maxage: '4h' }));
 app.use(bodyParser.json());
 
 // handle admin Telegram messages
-app.post('/hook', function(req, res){
+app.post('/hook', function(req, res) {
     try {
         const message = req.body.message || req.body.channel_post;
         const chatId = message.chat.id;
@@ -22,16 +22,16 @@ app.post('/hook', function(req, res){
         if (text.startsWith("/start")) {
             console.log("/start chatId " + chatId);
             sendTelegramMessage(chatId,
-                "*Welcome to Intergram* \n" +
+                "*Welcome to OplChat* \n" +
                 "Your unique chat id is `" + chatId + "`\n" +
-                "Use it to link between the embedded chat and this telegram chat",
+                "Use it to link between the embedded chat and this OplConnect chat",
                 "Markdown");
         } else if (reply) {
             let replyText = reply.text || "";
             let userId = replyText.split(':')[0];
-            io.emit(chatId + "-" + userId, {name, text, from: 'admin'});
-        } else if (text){
-            io.emit(chatId, {name, text, from: 'admin'});
+            io.emit(chatId + "-" + userId, { name, text, from: 'admin' });
+        } else if (text) {
+            io.emit(chatId, { name, text, from: 'admin' });
         }
 
     } catch (e) {
@@ -42,9 +42,9 @@ app.post('/hook', function(req, res){
 });
 
 // handle chat visitors websocket messages
-io.on('connection', function(client){
+io.on('connection', function(client) {
 
-    client.on('register', function(registerMsg){
+    client.on('register', function(registerMsg) {
         let userId = registerMsg.userId;
         let chatId = registerMsg.chatId;
         let messageReceived = false;
@@ -57,7 +57,7 @@ io.on('connection', function(client){
             sendTelegramMessage(chatId, userId + ":" + visitorName + " " + msg.text);
         });
 
-        client.on('disconnect', function(){
+        client.on('disconnect', function() {
             if (messageReceived) {
                 sendTelegramMessage(chatId, userId + " has left");
             }
@@ -88,7 +88,7 @@ app.post('/usage-end', cors(), function(req, res) {
     res.end();
 });
 
-http.listen(process.env.PORT || 3000, function(){
+http.listen(process.env.PORT || 3000, function() {
     console.log('listening on port:' + (process.env.PORT || 3000));
 });
 
